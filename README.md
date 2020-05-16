@@ -5,3 +5,11 @@ you just run
 ```bash
 docker-compose up -d
 ```
+
+
+```
+    MySQL
+    Apache2
+    PHP 7.2
+    PHP SQLSRV & pdo_sqlsrv
+```
