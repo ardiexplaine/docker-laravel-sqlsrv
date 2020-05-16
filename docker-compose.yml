@@ -1,0 +1,34 @@
+version: '3'
+
+networks:
+  cp-meiji:
+
+services:
+    webserver:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        container_name: cp-meiji-webserver
+        volumes:
+          - .:/var/www/
+        ports:
+          - "8084:80"
+        networks:
+            - cp-meiji
+        
+    mysql:
+        image: mysql:5.7.29
+        container_name: cp-meiji-mysql
+        restart: unless-stopped
+        tty: true
+        ports:
+        - "3306:3306"
+        environment:
+            MYSQL_DATABASE: order
+            MYSQL_USER: root
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: secret
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        networks:
+            - cp-meiji
